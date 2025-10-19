@@ -14,16 +14,15 @@ class Product:
 
     @classmethod
     def new_product(cls, product: dict):
-        return cls(product['name'], product['description'], product['price'], product['quantity'])
+        return cls(product["name"], product["description"], product["price"], product["quantity"])
 
     @property
-    def price(self) -> float:
+    def price(self):
         return self.__price
 
     @price.setter
-    def price(self, new_price: float):
+    def price(self, new_price: float) -> None:
         if new_price > 0:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
-

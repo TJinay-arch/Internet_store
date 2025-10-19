@@ -1,5 +1,6 @@
 from src.Product import Product
 
+
 class Category:
     """Класс описывающий сущность категории."""
 
@@ -18,14 +19,18 @@ class Category:
         Category.product_count += len(products) if products else 0
 
     def add_product(self, product: Product) -> None:
-        self.__products.append(product)
-        Category.product_count += 1
+        """
+        Добавляет продукт в категорию. Допускаются только объекты класса Product или его наследники.
+        """
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
 
     @property
-    def products(self) -> str:
+    def products(self):
         products = ""
         for product in self.__products:
             products += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
         return products
-
-
