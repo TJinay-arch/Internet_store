@@ -1,4 +1,4 @@
-from src.Product import Product
+from src.Product import LawnGrass, Product, Smartphone
 
 
 class Category:
@@ -25,6 +25,9 @@ class Category:
         if isinstance(product, Product):
             self.__products.append(product)
             Category.product_count += 1
+        elif issubclass(type(product), Smartphone) or issubclass(type(product), LawnGrass):
+            self.__products.append(product)
+            Category.product_count += 1
         else:
             raise TypeError("Добавлять можно только объекты класса Product или его наследников.")
 
@@ -40,4 +43,3 @@ class Category:
         for product in self.__products:
             total_count += product.quantity
         return f"{self.name}, количество продуктов: {total_count} шт."
-
