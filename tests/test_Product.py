@@ -1,3 +1,4 @@
+from src.MixinInfo import CreationInfoMixin
 from src.Product import LawnGrass, Product, Smartphone
 
 
@@ -106,3 +107,23 @@ S23 Ultra
         == """2580000.0
 16750.0"""
     )
+
+
+def test_product_with_mixin(capsys):
+
+    CreationInfoMixin.debug_mode = True
+    product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    captured_output = capsys.readouterr()
+    assert (
+        captured_output.out.strip()
+        == "Создан объект класса 'Product' с параметрами ('Samsung Galaxy S23 Ultra', '256GB, Серый цвет, 200MP камера', 180000.0, 5)"
+    )
+
+
+def test_product_abstract(capsys):
+
+    CreationInfoMixin.debug_mode = False
+    product_7 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    print(product_7.display_details())
+    captured_output = capsys.readouterr()
+    assert captured_output.out.strip() == "Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5"
