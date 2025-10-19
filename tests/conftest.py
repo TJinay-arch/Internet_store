@@ -13,7 +13,7 @@ def product() -> Product:
     return Product("onion", "for a salad", 5.55, 2)
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def category() -> Category:
     return Category(
         "vegetables",
