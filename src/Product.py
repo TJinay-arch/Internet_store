@@ -10,7 +10,10 @@ class Product:
         self.name = name
         self.description = description
         self.__price = price
-        self.quantity = quantity
+        if quantity:
+            self.quantity = quantity
+        else:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
     @classmethod
     def new_product(cls, product: dict):
