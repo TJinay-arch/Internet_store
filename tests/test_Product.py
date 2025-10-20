@@ -1,3 +1,5 @@
+import pytest
+
 from src.Product import LawnGrass, Product, Smartphone
 
 
@@ -106,3 +108,8 @@ S23 Ultra
         == """2580000.0
 16750.0"""
     )
+
+
+def test_product_invalid_input():
+    with pytest.raises(ValueError):
+        product_invalid = Product("Бракованный товар", "Неверное количество", 1000.0, 0)
