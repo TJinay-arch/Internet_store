@@ -1,4 +1,16 @@
-class Product:
+from abc import ABC, abstractmethod
+
+from src.MixinInfo import CreationInfoMixin
+
+
+class BaseProduct(ABC):
+    @abstractmethod
+    def display_details(self) -> str:
+        """Отображение детальной информации о продукте."""
+        pass
+
+
+class Product(BaseProduct, CreationInfoMixin):
     """Класс описывающий сущность продукты."""
 
     name: str
@@ -11,6 +23,11 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__(name, description, price, quantity)
+
+    def display_details(self) -> str:
+        """Отображение детальной информации о продукте."""
+        return f"{self.name}, {self.description}, {self.__price}, {self.quantity}"
 
     @classmethod
     def new_product(cls, product: dict):
@@ -47,6 +64,13 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
+    def display_details(self) -> str:
+        """Отображение детальной информации о продукте."""
+        return (
+            f"{self.name}, {self.description}, {self.__price}, {self.quantity}, {self.efficiency}, {self.model},"
+            f"{self.memory}, {self.color}"
+        )
+
 
 class LawnGrass(Product):
 
@@ -55,3 +79,10 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def display_details(self) -> str:
+        """Отображение детальной информации о продукте."""
+        return (
+            f"{self.name}, {self.description}, {self.__price}, {self.quantity}, {self.country},"
+            f"{self.germination_period}, {self.color}"
+        )
